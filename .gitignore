@@ -1,0 +1,17 @@
+*.out
+*~
+\#*\#
+experiments/*
+documents/
+*.zip
+.ssh
+\#*.*\#
+.*.swp
+.DS_[Ss]tore
+*.o
+Output*
+output*
+*.bak
+
+*.txt
+*.prog
