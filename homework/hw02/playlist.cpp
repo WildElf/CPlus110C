@@ -295,4 +295,123 @@ int main()
   return 0; 
 }
 
+/*
+Welcome! There are 4 tracks.
+1. Show Track
+2. Add Track
+3. Remove Track
+4. Change Track
+5. List All Tracks
+6. Quit
+Select Option: 3
+Enter position of the track to remove: 2
+Track 2 removed
 
+There are 3 tracks.
+1. Show Track
+2. Add Track
+3. Remove Track
+4. Change Track
+5. List All Tracks
+6. Quit
+Select Option: 3
+Enter position of the track to remove: 2
+Track 2 removed
+
+There are 2 tracks.
+1. Show Track
+2. Add Track
+3. Remove Track
+4. Change Track
+5. List All Tracks
+6. Quit
+Select Option: 5
+Track 1: California Love
+Track 2: Sunday Morning Coming Down
+
+There are 2 tracks.
+1. Show Track
+2. Add Track
+3. Remove Track
+4. Change Track
+5. List All Tracks
+6. Quit
+Select Option: 2
+Enter the position for the new track: 2
+Enter the name of the track: Folsom Prison Blues
+The song Folsom Prison Blues was added at position 2
+
+There are 3 tracks.
+1. Show Track
+2. Add Track
+3. Remove Track
+4. Change Track
+5. List All Tracks
+6. Quit
+Select Option: 4
+Enter position of the track to change: 4
+Enter the new name of the track: Blue Suede Shoes
+ERROR: setEntry() using invalid position
+Track at 4 is Invalid
+
+There are 3 tracks.
+1. Show Track
+2. Add Track
+3. Remove Track
+4. Change Track
+5. List All Tracks
+6. Quit
+Select Option: 5
+Track 1: California Love
+Track 2: Folsom Prison Blues
+Track 3: Sunday Morning Coming Down
+
+There are 3 tracks.
+1. Show Track
+2. Add Track
+3. Remove Track
+4. Change Track
+5. List All Tracks
+6. Quit
+Select Option: 2
+Enter the position for the new track: 4
+Enter the name of the track: Kind of Suede
+The song Kind of Suede was added at position 4
+
+There are 4 tracks.
+1. Show Track
+2. Add Track
+3. Remove Track
+4. Change Track
+5. List All Tracks
+6. Quit
+Select Option: 2
+Enter the position for the new track: 4
+Enter the name of the track: Blue Suede Shoes
+The song Blue Suede Shoes was added at position 4
+
+There are 5 tracks.
+1. Show Track
+2. Add Track
+3. Remove Track
+4. Change Track
+5. List All Tracks
+6. Quit
+Select Option: 5
+Track 1: California Love
+Track 2: Folsom Prison Blues
+Track 3: Sunday Morning Coming Down
+Track 4: Blue Suede Shoes
+Track 5: Kind of Suede
+
+There are 5 tracks.
+1. Show Track
+2. Add Track
+3. Remove Track
+4. Change Track
+5. List All Tracks
+6. Quit
+Select Option: 6
+
+Rock on!
+*/
