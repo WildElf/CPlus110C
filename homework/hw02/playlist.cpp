@@ -48,20 +48,20 @@ bool List<ItemType>::insert(int pos, const ItemType& item)
   canAdd = ((pos > 0) && (pos <= numItems + 1));
   if (canAdd)
   {
-  // if the current array is full, we'll increase the maximum size first
-  if (numItems == maxItems)
-  {
-    maxItems += CHUNK_SIZE;
-    ItemType *newList = new ItemType[maxItems];
-    
-    for (int i=0;i<numItems;i++)
+    // if the current array is full, we'll increase the maximum size first
+    if (numItems == maxItems)
     {
-      newList[i] = list[i];      
-    }
+      maxItems += CHUNK_SIZE;
+      ItemType *newList = new ItemType[maxItems];
     
-    delete [] list;
-    list = newList;
-  }
+      for (int i=0;i<numItems;i++)
+      {
+        newList[i] = list[i];      
+      }
+    
+      delete [] list;
+      list = newList;
+    }
 
     // move everything after our insertion point over one position
     // to make room for our new item.  start at the back of the list.
