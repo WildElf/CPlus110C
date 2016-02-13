@@ -8,19 +8,18 @@
 #include <string>
 
 template<class ItemType>
-Node<ItemType>::Node() : next(nullptr), prev(nullptr)
+Node<ItemType>::Node() : next(nullptr)
 {
 } // end default constructor
 
 template<class ItemType>
-Node<ItemType>::Node(const ItemType& anItem) : item(anItem), next(nullptr), prev(nullptr)
+Node<ItemType>::Node(const ItemType& anItem) : item(anItem), next(nullptr)
 {
 } // end constructor
 
 template<class ItemType>
-Node<ItemType>::Node(const ItemType& anItem, Node<ItemType>* nextNodePtr, 
-												Node<ItemType>* prevNodePtr) :
-					 item(anItem), next(nextNodePtr), prev(prevNodePtr)
+Node<ItemType>::Node(const ItemType& anItem, Node<ItemType>* nextNodePtr) :
+					 item(anItem), next(nextNodePtr)
 {
 } // end constructor
 
