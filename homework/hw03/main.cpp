@@ -1,5 +1,5 @@
-//  Created by Frank M. Carrano and Tim Henry.
-//  Copyright (c) 2013 __Pearson Education__. All rights reserved.
+//	Created by Frank M. Carrano and Tim Henry.
+//	Copyright (c) 2013 __Pearson Education__. All rights reserved.
 
 #include <iostream>
 #include <string>
@@ -9,34 +9,42 @@ using namespace std;
 
 void displayList(ListInterface<string>* listPtr)
 {
-	cout << "The list contains: " << endl;
+	cout << "\nThe list contains: " << endl;
 	for (int pos = 1; pos <= listPtr->getLength(); pos++)
 	{
 		cout << listPtr->getEntry(pos) << " ";
 	} // end for
 	cout << endl << endl;
-}  // end displayList
+}	// end displayList
 
 void listTester()
 {
 	ListInterface<string>* listPtr = new LinkedList<string>();
+	ListInterface<string>* listDblPtr = new LinkedList<string>();
+	
 	cout << "Testing the Link-Based List:" << endl;
+	string newData[] = {"six", "five", "four", "three", "two", "one"};
 	string data[] = {"one", "two", "three", "four", "five", "six"};
-	cout << "isEmpty: returns " << listPtr->isEmpty() << "; should be 1 (true)" << endl;
+	cout << "isEmpty: returns " << listDblPtr->isEmpty() << "; should be 1 (true)" << endl;
+	
 	for (int i = 0; i < 6; i++)
 	{
-		
-	  if (listPtr->insert(i + 1, data[i]))
+		cout << "Loop: " << i + 1 << endl;
+		if (listPtr->insert(i + 1, data[i]) && listDblPtr->insert(1, newData[i]))
 		{
+			cout << "Inserted " << listDblPtr->getEntry(1)
+			 << " at position 1" << endl;
+
 			cout << "Inserted " << listPtr->getEntry(i + 1)
 			 << " at position " << (i + 1) << endl;
 		}
 		else
 			cout << "Cannot insert " << data[i] << " at position " << (i + 1)
 			<< endl;
-	}  // end for
+	}	// end for
 
 	displayList(listPtr);
+	displayList(listDblPtr);
 	
 	cout << "isEmpty: returns " << listPtr->isEmpty() << "; should be 0 (false)" << endl;
 	cout << "getLength returns : " << listPtr->getLength() << "; should be 6" << endl;
@@ -54,7 +62,7 @@ int main()
 {
 	listTester();
 	return 0;
-}  // end main
+}	// end main
 
 /***** EXPECTED OUTPUT WITH CORRECT INSERT FUNCTION
 Testing the Link-Based List:

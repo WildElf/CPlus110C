@@ -31,14 +31,18 @@ LinkedList<ItemType>::LinkedList(const LinkedList<ItemType>& aList) : itemCount(
 	Node<ItemType>* origTailPtr = aList.tailPtr;  // Points to original chain tail
 
 	if (origHeadPtr == nullptr && origTailPtr == nullptr) // Original list is empty
+	{
 		headPtr = nullptr;  
 		tailPtr = nullptr;
+	}
 	else
 	{
 		// Copy first node
 		headPtr = new Node<ItemType>();
-//		tailPtr = new Node<ItemType<();
 		headPtr->setItem(origHeadPtr->getItem());
+
+		// Copy last node
+//		tailPtr = new Node<ItemType<();
 //		tailPtr->setItem(origTailPtr>getItem());
 		
 		// Copy remaining nodes
@@ -90,6 +94,7 @@ int LinkedList<ItemType>::getLength() const
 template<class ItemType>
 bool LinkedList<ItemType>::insert(int newPosition, const ItemType& newEntry)
 {
+
 	bool ableToInsert = (newPosition >= 1) && (newPosition <= itemCount + 1);
 	if (ableToInsert)
 	{
@@ -97,32 +102,31 @@ bool LinkedList<ItemType>::insert(int newPosition, const ItemType& newEntry)
 		// Create a new node containing the new entry 
 		Node<ItemType>* newNodePtr = new Node<ItemType>(newEntry);  
 
-		if (newPosition == 1 && newPostion == itemCount)
+		if (newPosition == 1 && itemCount == 1)
 		{
-			newNodePtr->setNext(headPtr);
-			newNodePtr->setPrev(tailPtr);
+			// add the one and only
 			tailPtr = headPtr = newNodePtr;
 		}
 		else if (newPosition == 1)
 		{
+			std::cout << "***Adding another first item\n";
 			// set new entry at first position
-			newNodePtr->setNext(headPtr);
-			headPtr = newNodePtr;
+			newNodePtr->setNext(headPtr); // get ahead of heatPtr
+			headPtr->setPrev(newNodePtr); // set headPtr behind new node
+			headPtr = newNodePtr; // become the new head
 		}
-		else if (newPostion == itemCount)
+		else if (newPosition == itemCount)
 		{
+			std::cout << "***Adding a last item\n";
 			// set new entry at the last position
-			newNodePtr->setPrev(tailPtr);
-			tailPtr = newNodePtr;
+			newNodePtr->setPrev(tailPtr); // get behind tailPtr
+			tailPtr->setNext(newNodePtr); // set tailPtr in front of new node
+			tailPtr = newNodePtr; // become the new tail
+
 		}
 		else
 		{
-	 	 /* Max's example
-	 	 Node<ItemType>* prevPtr = getNodeAt(newPosition-1);
-	 	 
-	 	 newNodePtr->setNext(prevPtr->getNext());
-			prevPtr->setNext(newNodePtr);
-	 	 */
+			std::cout << "***Adding a middle item";
 	 	 
 			Node<ItemType>* nextPtr = getNodeAt(newPosition);
 			Node<ItemType>* prevPtr = getNodeAt(newPosition-1);
@@ -151,7 +155,15 @@ bool LinkedList<ItemType>::remove(int position)
 			// Remove the first node in the chain
 			curPtr = headPtr; // Save pointer to node
 			headPtr = headPtr->getNext();
+			headPtr->setPrev(nullptr); // disconnect backwards connection
 			
+		}
+		else if (position == itemCount)
+		{
+			// remove last node in the chain
+			curPtr = tailPtr; // save pointer for clean up
+			tailPtr = tailPtr->getPrev();
+			tailPrt->setNext(nullptr); // disconnect foreward connection
 		}
 		else
 		{
@@ -164,6 +176,7 @@ bool LinkedList<ItemType>::remove(int position)
 			// Disconnect indicated node from chain by connecting the
 			// prior node with the one after
 			prevPtr->setNext(curPtr->getNext());
+			
 		}  // end if
 		
 		// Return node to system
@@ -187,12 +200,14 @@ void LinkedList<ItemType>::clear()
 template<class ItemType>
 ItemType LinkedList<ItemType>::getEntry(int position) const throw(PrecondViolatedExcep)
 {
+
 	// Enforce precondition
 	bool ableToGet = (position >= 1) && (position <= itemCount);
 	if (ableToGet)
 	{
+
 		Node<ItemType>* nodePtr = getNodeAt(position);
-		
+			
 		return nodePtr->getItem();
 	}
 	else

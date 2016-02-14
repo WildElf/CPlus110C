@@ -6,6 +6,7 @@
 #include "Node.h"
 #include <cstddef>
 #include <string>
+#include <iostream>
 
 template<class ItemType>
 Node<ItemType>::Node() : next(nullptr), prev(nullptr)
@@ -45,6 +46,10 @@ void Node<ItemType>::setPrev(Node<ItemType>* prevNodePtr)
 template<class ItemType>
 ItemType Node<ItemType>::getItem() const
 {
+//	std::cout << "***Trying to get item ";
+//	std::cout << item;
+//	std::cout << " and got it successfully!\n";
+
 	return item;
 } // end getItem
 
@@ -54,6 +59,7 @@ Node<ItemType>* Node<ItemType>::getNext() const
 	return next;
 } // end getNext
 
+template<class ItemType>
 Node<ItemType>* Node<ItemType>::getPrev() const
 {
 	return prev;
@@ -62,4 +68,3 @@ Node<ItemType>* Node<ItemType>::getPrev() const
 //  End of implementation file.  Add definitions of template types we will use (int or string):
 template class Node<int>;
 template class Node<std::string>;
-template class Node<float>;
