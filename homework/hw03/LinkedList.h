@@ -1,5 +1,7 @@
 //  Created by Frank M. Carrano and Tim Henry.
 //  Copyright (c) 2013 __Pearson Education__. All rights reserved.
+// E Jo Zimmerman - 110C - Assignment 3
+// Creating a double linked list and reverse function
 
 /** ADT list: Link-based implementation.
 	 Listing 9-2.
@@ -42,6 +44,7 @@ public:
 	bool insert(int newPosition, const ItemType& newEntry);
 	bool remove(int position);
 	void clear();
+	void reverse();
 	
 	/** @throw PrecondViolatedExcep if position < 1 or 
 												  position > getLength(). */

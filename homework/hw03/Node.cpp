@@ -1,5 +1,7 @@
 //  Created by Frank M. Carrano and Tim Henry.
 //  Copyright (c) 2013 __Pearson Education__. All rights reserved.
+// E Jo Zimmerman - 110C - Assignment 3
+// Creating a double linked list and reverse function
 
 /** @file Node.cpp 
 	 Listing 4-2 */

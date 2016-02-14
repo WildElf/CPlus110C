@@ -1,5 +1,7 @@
 //  Created by Frank M. Carrano and Tim Henry.
 //  Copyright (c) 2013 __Pearson Education__. All rights reserved.
+// E Jo Zimmerman - 110C - Assignment 3
+// Creating a double linked list and reverse function
 
 /** Interface for the ADT list
 	 Listing 8-1
@@ -57,5 +59,12 @@ public:
 	 @param position  The list position of the entry to replace.
 	 @param newEntry  The replacement entry. */
 	virtual void setEntry(int position, const ItemType& newEntry) = 0;
+	
+	/** Reverses the list
+	@pre  headPtr <=> itemN <=> itemN+1 <=> tailPtr
+	@post  tailPtr <=> itemN+1 <=> itemN <=> headPtr
+	*/
+	virtual void reverse() = 0;
+
 }; // end ListInterface
 #endif

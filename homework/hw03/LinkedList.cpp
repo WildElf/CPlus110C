@@ -1,5 +1,7 @@
 //  Created by Frank M. Carrano and Tim Henry.
 //  Copyright (c) 2013 __Pearson Education__. All rights reserved.
+// E Jo Zimmerman - 110C - Assignment 3
+// Creating a double linked list and reverse function
 
 /** Implementation file for the class LinkedList.
  @file LinkedList.cpp */
@@ -40,10 +42,6 @@ LinkedList<ItemType>::LinkedList(const LinkedList<ItemType>& aList) : itemCount(
 		// Copy first node
 		headPtr = new Node<ItemType>();
 		headPtr->setItem(origHeadPtr->getItem());
-
-		// Copy last node
-//		tailPtr = new Node<ItemType<();
-//		tailPtr->setItem(origTailPtr>getItem());
 		
 		// Copy remaining nodes
 		Node<ItemType>* newNextPtr = headPtr;		// Points to last node in new chain
@@ -54,10 +52,13 @@ LinkedList<ItemType>::LinkedList(const LinkedList<ItemType>& aList) : itemCount(
 			ItemType nextItem = origHeadPtr->getItem();
 			
 			// Create a new node containing the next item 
-			Node<ItemType>* newNodePtr = new Node<ItemType>(nextItem);  
+			Node<ItemType>* newTailPtr = new Node<ItemType>(nextItem);  
 			
 			// Link new node to end of new chain
-			newNextPtr->setNext(newNodePtr);
+			newNextPtr->setNext(newTailPtr);
+			
+			// Link new end of chain to predecessor
+			newTailPtr->setPrev(newNextPtr);
 			
 			// Advance pointer to new last node		
 			newNextPtr = newNextPtr->getNext();
@@ -67,6 +68,7 @@ LinkedList<ItemType>::LinkedList(const LinkedList<ItemType>& aList) : itemCount(
 		}  // end while
 		
 		newNextPtr->setNext(nullptr);				  // Flag end of chain
+		tailPtr = newNextPtr;
 	}  // end if
 }  // end copy constructor
 
@@ -109,7 +111,6 @@ bool LinkedList<ItemType>::insert(int newPosition, const ItemType& newEntry)
 		}
 		else if (newPosition == 1)
 		{
-			std::cout << "***Adding another first item\n";
 			// set new entry at first position
 			newNodePtr->setNext(headPtr); // get ahead of heatPtr
 			headPtr->setPrev(newNodePtr); // set headPtr behind new node
@@ -117,7 +118,6 @@ bool LinkedList<ItemType>::insert(int newPosition, const ItemType& newEntry)
 		}
 		else if (newPosition == itemCount)
 		{
-			std::cout << "***Adding a last item\n";
 			// set new entry at the last position
 			newNodePtr->setPrev(tailPtr); // get behind tailPtr
 			tailPtr->setNext(newNodePtr); // set tailPtr in front of new node
@@ -125,9 +125,7 @@ bool LinkedList<ItemType>::insert(int newPosition, const ItemType& newEntry)
 
 		}
 		else
-		{
-			std::cout << "***Adding a middle item";
-	 	 
+		{	 	 
 			Node<ItemType>* nextPtr = getNodeAt(newPosition);
 			Node<ItemType>* prevPtr = getNodeAt(newPosition-1);
 
@@ -150,7 +148,11 @@ bool LinkedList<ItemType>::remove(int position)
 	if (ableToRemove)
 	{
 		Node<ItemType>* curPtr = nullptr;
-		if (position == 1)
+		if (position == 1 && position == itemCount)
+		{
+			curPtr = headPtr = tailPtr;
+		}
+		else if (position == 1)
 		{
 			// Remove the first node in the chain
 			curPtr = headPtr; // Save pointer to node
@@ -163,7 +165,7 @@ bool LinkedList<ItemType>::remove(int position)
 			// remove last node in the chain
 			curPtr = tailPtr; // save pointer for clean up
 			tailPtr = tailPtr->getPrev();
-			tailPrt->setNext(nullptr); // disconnect foreward connection
+			tailPtr->setNext(nullptr); // disconnect forward connection
 		}
 		else
 		{
@@ -181,6 +183,7 @@ bool LinkedList<ItemType>::remove(int position)
 		
 		// Return node to system
 		curPtr->setNext(nullptr);
+		curPtr->setPrev(nullptr);
 		delete curPtr;
 		curPtr = nullptr;
 		
@@ -196,6 +199,51 @@ void LinkedList<ItemType>::clear()
 	while (!isEmpty())
 		remove(1);
 }  // end clear
+
+template<class ItemType>
+void LinkedList<ItemType>::reverse()
+{	
+	int step = 0;
+	
+	Node<ItemType>* curPtr = nullptr;
+	Node<ItemType>* newHead = tailPtr;
+	Node<ItemType>* newTail = nullptr;
+
+	while (step < itemCount)
+	{
+		step++;
+
+
+		if (step == 1)
+		{
+			// start at the old tail, set up the newHead 
+			newHead->setNext(newHead->getPrev());
+			newHead->setPrev(nullptr);
+
+			curPtr = newHead->getNext();
+		}
+		else if (step == itemCount)
+		{
+			// finish up
+			newTail->setPrev(curPtr->getNext());
+			newTail->setNext(nullptr);
+		}
+		else
+		{
+			// use newTail as old chain tail position holder
+			newTail = curPtr->getPrev();
+		
+			curPtr->setPrev(curPtr->getNext());
+			curPtr->setNext(newTail);
+
+			curPtr = newTail;
+		}
+	}
+	headPtr = newHead;
+	tailPtr = newTail;
+
+	
+}
 
 template<class ItemType>
 ItemType LinkedList<ItemType>::getEntry(int position) const throw(PrecondViolatedExcep)
@@ -260,7 +308,7 @@ Node<ItemType>* LinkedList<ItemType>::getNodeAtRecursive(int position,
 		return curPtr;
 	}
 	else
-	{
+	{	
 		return getNodeAtRecursive(position-1, curPtr->getNext());
 	}
 
