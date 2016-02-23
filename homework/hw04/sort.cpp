@@ -90,7 +90,8 @@ int Sort::merge(int* array, int first, int mid, int last)
 	
 	for (int i=first;i<=last;i++)
 		array[i] = tempArray[i-first];
-		
+	
+//	delete [] tempArray;
 	return compares;
 }
 
@@ -167,6 +168,7 @@ int Sort::bucketSort()
 			{
 				theArray[arrayStep] = i;
 				arrayStep++;
+				compares++;
 			}
 		}
 		
@@ -270,13 +272,13 @@ int main()
 
 /* sample output
 Sort Algorithm	ArrayLength	Pass 1	Pass 2	Pass 3	Average
-Selection		8			8		9		8		8.33333	
-Selection		32			65		54		69		62.6667	
-Selection		128			418		427		388		411	
-Merge			8			6		6		7		6.33333	
-Merge			32			29		31		29		29.6667	
-Merge			128			127		127		127		127	
-Bucket			8			816		816		816		816	
-Bucket			32			3264	3264	3264	3264	
-Bucket			128			13056	13056	13056	13056	
+Selection		8			8		8		9		8.33333	
+Selection		32			80		54		67		67	
+Selection		128			460		402		394		418.667	
+Merge			8			7		6		6		6.33333	
+Merge			32			31		30		31		30.6667	
+Merge			128			126		125		125		125.333	
+Bucket			8			16		16		16		16	
+Bucket			32			64		64		64		64	
+Bucket			128			256		256		256		256
 */
