@@ -1,8 +1,8 @@
 // E Jo Zimmerman - 110C - Assignment 3
 // Sort class that can sort for 
-// O(n^2) using selection
+// O(n^2) using selection sort
 // O(n log n) using merge sort
-// And "bucket" sort
+// And "bucket" sort for O(???)
 #include <iostream>
 #include <string>
 #include <ctime>
@@ -16,17 +16,17 @@ private:
 	int* theArray;
 	int size;
 	bool arrayExists()
-		{ return !(theArray == nullptr); }
+		{ return !(theArray == NULL); }
 	int merge(int*, int, int, int);
 	int mergeRecursion(int*, int, int);
 
 
 public:
-	Sort() { theArray = nullptr; size = 0; }
+	Sort() { theArray = NULL; size = 0; }
 	Sort(int* array, int s)
 		{ theArray = array; size = s; }
 	~Sort()
-		{ theArray = nullptr; }
+		{ theArray = NULL; }
 	void setNewArray(int* array, int s)
 		{ theArray = array; size = s; }
 	int selectionSort();
@@ -36,6 +36,7 @@ public:
 		{ return theArray[i]; }
 };
 
+// private helper function for merge sort
 int Sort::mergeRecursion(int* array, int first, int last)
 {
 	int compares = 0;
@@ -52,6 +53,7 @@ int Sort::mergeRecursion(int* array, int first, int last)
 	return compares;
 }
 
+// private helper function for merge sort
 int Sort::merge(int* array, int first, int mid, int last)
 {
 	int compares = 0;
@@ -95,6 +97,7 @@ int Sort::merge(int* array, int first, int mid, int last)
 	return compares;
 }
 
+// public selection sort caller
 int Sort::selectionSort()
 {
 	int compares = 0;
@@ -135,6 +138,7 @@ int Sort::selectionSort()
 	}
 }
 
+// public merge sort caller
 int Sort::mergeSort()
 {
 	if (arrayExists())
@@ -148,12 +152,17 @@ int Sort::mergeSort()
 	}
 }
 
+// public bucket sort caller
 int Sort::bucketSort()
 {
 	int compares = 0;
 	if (arrayExists())
 	{		
 		int* count = new int[101];
+		// to zero this out on hills
+		for (int i=0;i<=101;i++)
+			count[i] = 0;
+
 		for (int j=0;j<size;j++)
 		{
 			count[theArray[j]]++;
@@ -187,6 +196,9 @@ int main()
 	srand(time(NULL));
 	int size;
 	
+	// 2D array for
+	// 3 sizes: 8, 32, 128
+	// 4 results: 3 passes at each size, plus the average
 	double nSquarePass[3][4] = { 0 };
 	double nLogPass[3][4] = { 0 };
 	double bucketPass[3][4] = { 0 };
@@ -196,7 +208,7 @@ int main()
 		int step = 0;
 		for (size=8; size<200;size*=4)
 		{
-	
+	        // raw arrays for sorting
 			int* nSquare = new int[size];
 			int* nLog = new int[size];
 			int* nBucket = new int[size];
@@ -204,12 +216,14 @@ int main()
 
 			for (int i=0;i<size;i++)
 			{
+				// each array gets the same number for cross comparisons
 				newInt = rand()%101;
 				nSquare[i] = newInt; 		
 				nLog[i] = newInt; 		
 				nBucket[i] = newInt; 		
 			}
-	
+			
+			// sort objects return the number of compares into 2D array
 			Sort tommyLaSorta(nSquare, size);
 			nSquarePass[step][pass] = tommyLaSorta.selectionSort();
 	
@@ -218,7 +232,8 @@ int main()
 	
 			tommyLaSorta.setNewArray(nBucket, size);	
 			bucketPass[step][pass] = tommyLaSorta.bucketSort();
-				
+			
+			// prep the average index with average totals 
 			nSquarePass[step][3] += nSquarePass[step][pass];
 			nLogPass[step][3] += nLogPass[step][pass];
 			bucketPass[step][3] += bucketPass[step][pass];
@@ -230,24 +245,29 @@ int main()
 	
 	for (size=0;size<3;size++)
 	{
+		// turn the totals into averages
 		nSquarePass[size][3] /= 3.0;
 		nLogPass[size][3] /= 3.0;
 		bucketPass[size][3] /= 3.0;		
 	}
 	
+	// build a table for comparisons
+	// looks good in a terminal (a text editor might need massaging)
 	cout << "Sort Algorithm\tArrayLength\tPass 1\tPass 2\tPass 3\tAverage\n";
 	for (int types=0;types<3;types++)
 	{	
 
 		for (int sizes=0;sizes<3;sizes++)
 		{
+			// first print the types
 			if (types==0)
 				cout << "Selection\t";
 			else if (types == 1)
 				cout << "Merge\t\t";
 			else
 				cout << "Bucket\t\t";
-
+			
+			// then print the array size
 			if (sizes==0)
 				cout << "8\t\t";
 			else if (sizes == 1)
@@ -255,6 +275,7 @@ int main()
 			else
 				cout << "128\t\t";
 				
+			// print the comparison results with tab delimination
 			for (int passes=0; passes<=3; passes++)
 			{
 				if (types==0)
