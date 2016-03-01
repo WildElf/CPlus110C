@@ -16,3 +16,4 @@ output*
 *.txt
 *.prog
 exercise
+makefile
