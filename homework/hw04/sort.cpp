@@ -266,7 +266,7 @@ int main()
 				cout << "Merge\t\t";
 			else
 				cout << "Bucket\t\t";
-			
+
 			// then print the array size
 			if (sizes==0)
 				cout << "8\t\t";
@@ -275,7 +275,7 @@ int main()
 			else
 				cout << "128\t\t";
 				
-			// print the comparison results with tab delimination
+			// print the comparison results with tab delimitation
 			for (int passes=0; passes<=3; passes++)
 			{
 				if (types==0)
@@ -285,7 +285,7 @@ int main()
 				else
 					cout << bucketPass[sizes][passes] << "\t";
 			}
-			
+
 			cout << endl;
 		}
 	}
