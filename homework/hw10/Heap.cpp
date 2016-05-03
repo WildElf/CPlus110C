@@ -1,5 +1,7 @@
+// Assignment 10, Emergency Room
+// E. Jo Zimmerman, 110C
+// Heap class implementation
 #include "Heap.h"
-//#include "Patient.h"
 
 void Heap::swap(Patient &a, Patient &b)
 {

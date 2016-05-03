@@ -1,3 +1,5 @@
+// Assignment 10, Emergency Room
+// E. Jo Zimmerman, 110C
 #include "Heap.h"
 
 using namespace std;

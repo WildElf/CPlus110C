@@ -1,3 +1,6 @@
+// Assignment 10, Emergency Room
+// E. Jo Zimmerman, 110C
+// Patient class definition & implementation
 #ifndef PATIENT_H
 #define PATIENT_H
 #include <string>

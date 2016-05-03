@@ -1,3 +1,6 @@
+// Assignment 10, Emergency Room
+// E. Jo Zimmerman, 110C
+// (Patient) Heap class definition, for a heap of patients
 #ifndef HEAP_H
 #define HEAP_H
 #include "Patient.h"
