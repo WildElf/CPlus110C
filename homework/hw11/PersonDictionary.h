@@ -9,7 +9,7 @@
 
 struct PersonEntry {
 	Person p;
-	Person* nextPerson;	
+	PersonEntry* nextPerson;	
 };
 
 class PersonDictionary
@@ -19,8 +19,10 @@ private:
 	PersonEntry* monthHash[13];
 	int numPersons;
 	int maxSize;
-	int binarySearch(string n, int min, int max);
-	int binarySearch(Person p, int min, int max);
+	int binarySearch(string n, int min, int max) const;
+	int binarySearch(Person p, int min, int max) const;
+	PersonEntry* addToMonthHash(Person &p);
+	bool removeFromMonthHash(const Person &p);
 public:
 	PersonDictionary();
 	~PersonDictionary()
@@ -28,14 +30,12 @@ public:
 	bool isEmpty();
 	bool add(Person p);
 	bool remove(string n);
-	Person searchName(string s) throw(NotFoundException);
-//	Person searchMonth(int m) throw(NotFoundException);
+	Person getBirthday(string s) const throw(NotFoundException);
+//	void searchMonth(int m) throw(NotFoundException);
 //	Person searchDay(int d);
 	void listAll();
 	void listMonth(int m);
 //	void listDay(int d);
-	int getDictSize()
-	{ return numPersons; }
 };
 
 #endif

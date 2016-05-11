@@ -28,14 +28,15 @@ public:
 	void setMonth(int m);
 	void setDay(int d);
 	void setBirthday(int m, int d);
-	string getName()
+	string getName() const
 	{ return name; }
-	int getMonth()
+	int getMonth() const
 	{ return month; }
 	void print();
 	bool operator<(const Person &p);
 	bool operator>(const Person &p);	
 	bool operator==(const Person &p);
+	bool operator!=(const Person &p);
 	bool operator<(string n);
 	bool operator>(string n);	
 	bool operator==(string n);

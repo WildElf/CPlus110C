@@ -111,10 +111,10 @@ void Person::print()
 {
 	if (name != "" && validMonth() && validDay())
 		cout << name << ": " << getMonthName() << " " << day << ".\n";
+	else if (!validMonth())
+		cout << name << " entry is invalid. " << month << "\n";
 	else if (!validDay())
-		cout << "This entry is invalid.\n";
-	else if (!validDay())
-		cout << "This entry is invalid.\n";
+		cout << "This entry is invalid. " << day << "\n";
 	else if (name == "")
 		cout << "This entry has no name.\n";
 }
@@ -132,6 +132,11 @@ bool Person::operator>(const Person &p)
 bool Person::operator==(const Person &p)
 {
 	return name == p.name;
+}
+
+bool Person::operator!=(const Person &p)
+{
+	return !(*this == p);
 }
 
 bool Person::operator<(string n)
